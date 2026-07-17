@@ -1,0 +1,181 @@
+{ config, pkgs, ... }:
+
+{
+  imports =
+    [
+      ./hardware-configuration.nix
+    ];
+
+#==CONFIGURACION-DE-GRUB-Y-SYSTEMD==#
+  # Instala Grub
+  boot.loader = {
+    grub = {
+      enable = true;
+      device = "nodev"; 
+      efiSupport = true;
+    };
+    efi.canTouchEfiVariables = true;
+  };
+
+  # Hace que SystemD Ignore el Boton de Apagado
+  services.logind.settings.Login.HandlePowerKey = "ignore";
+
+#==RED-E-INTERNET==#
+  # Establece el Nombre del Host
+  networking.hostName = "nixos";
+
+  # Habilita la Red
+  networking.networkmanager.enable = true;
+
+  # Habilita el Servicio de Tailscale VPN
+  services.tailscale.enable = true;
+
+  # Abre los Puertos del Cortafuegos
+  # networking.firewall.allowedTCPPorts = [ ... ];
+  # networking.firewall.allowedUDPPorts = [ ... ];
+
+  # Desabilita el Cortafuegos
+  # networking.firewall.enable = false;
+
+
+#==SONIDO==#
+  # Habilita y configura PipeWire
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+#==BLUETOOTH==#
+  # Habilita el Servicio Bluetooth
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
+#==DATOS-GENERALES==#
+  # Establece la Zona Horaria
+  time.timeZone = "Europe/Madrid";
+
+  # Selecciona las Propiedades Internacionales
+  i18n.defaultLocale = "es_ES.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "es_ES.UTF-8";
+    LC_IDENTIFICATION = "es_ES.UTF-8";
+    LC_MEASUREMENT = "es_ES.UTF-8";
+    LC_MONETARY = "es_ES.UTF-8";
+    LC_NAME = "es_ES.UTF-8";
+    LC_NUMERIC = "es_ES.UTF-8";
+    LC_PAPER = "es_ES.UTF-8";
+    LC_TELEPHONE = "es_ES.UTF-8";
+    LC_TIME = "es_ES.UTF-8";
+  };
+
+  # Configura los Esquemas de Teclado en X11
+  services.xserver.xkb = {
+    layout = "es";
+    variant = "";
+  };
+
+  # Configura los Esquemas de Teclado en Consola
+  console.keyMap = "es";
+
+#==CONFIGURACION-DEL-ENTORNO==#
+  # Habilita X11
+  services.xserver.enable = true;
+
+  # Habilita el Escritorio Budgie
+  services.xserver.displayManager.lightdm.enable = true;
+  services.desktopManager.budgie.enable = true;
+
+#==CONFIGURACION-DEL-USUARIO
+  # Define el Usuario
+  users.users."antsoftware21" = {
+    isNormalUser = true;
+    description = "Antsoftware21";
+    extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "podman" "adbusers" ];
+
+  # Rangos de subUID y subGID para contenedores rootless
+  subUidRanges = [ { count = 65536; startUid = 100000; } ];
+  subGidRanges = [ { count = 65536; startGid = 100000; } ];
+  };
+
+#==SERVICIOS==#
+  # Habilita el Servicio de Impresion
+  services.printing.enable = true;
+
+  # Habilita el Servicio de SSH
+  services.openssh.enable = true;
+
+  # Habilita el Servicio Flatpak.
+  services.flatpak.enable = true;
+
+  # Habilita el Servicio de los Perfiles de Potencia
+  services.power-profiles-daemon.enable = true;
+
+  # Habilita la Virtualizacion de LibVirt
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+    };
+  };
+
+  # Habilita la Virtualizacion de Podman
+  virtualisation.podman = {
+    enable = true;
+    dockerCompat = true;
+    defaultNetwork.settings.dns_enabled = true;
+  };
+
+#==PAQUETES==#
+  # Permite los Paquetes No-Libres
+  nixpkgs.config.allowUnfree = true;
+
+  # Lista de Paquetes
+  environment.systemPackages = with pkgs; [
+    # Temas :  
+    papirus-icon-theme graphite-cursors    
+
+    # Miscelaneos :
+    ximimoments.katifetch git curl wget htop btop cava nyancat
+    android-tools nicotine-plus podman distrobox virt-manager
+
+    # Mis Programas :
+    ungoogled-chromium kitty vesktop telegram-desktop obs-studio nocturne
+    filezilla vlc kdePackages.kdenlive vscodium obsidian libresprite  
+    retroarch 
+  ];
+
+  # Aqui van las Fuentes Tipograficas
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    ];
+
+  # Habilita Steam
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true; 
+  };
+
+#==NIX-USER-REPOSITORY==#
+  # Agrego el Repo de NixUserRepository de Katifetch
+  nixpkgs.config.packageOverrides = pkgs: {
+    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+      inherit pkgs;
+    };
+    ximimoments = import (builtins.fetchTarball "https://github.com/ximimoments/nur-packages/archive/main.tar.gz") {
+      inherit pkgs;
+    };
+  };
+
+
+#==VERSION-DEL-ARCHIVO==#
+  # Simplemente no toques esto a no ser que quieras Actualizar el Sistema
+  system.stateVersion = "26.05";
+}
