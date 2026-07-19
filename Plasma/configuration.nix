@@ -116,6 +116,7 @@
   # Habilita el Servicio de los Perfiles de Potencia
   services.power-profiles-daemon.enable = true;
 
+#==VIRTUALIZACION==#
   # Habilita la Virtualizacion de LibVirt
   virtualisation.libvirtd = {
     enable = true;
