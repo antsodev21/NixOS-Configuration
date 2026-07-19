@@ -1,21 +1,10 @@
-# Perfil 1: Solo el portátil (Asus Vivobook)
+#==SOLO-PANTALLA==#
 profile {
-    output eDP-1 enable mode 1920x1080 position 0,0
+    output eDP-1 enable mode 1366x768 position 0,0
 }
 
-# Perfil 2: Portátil + Monitor Externo (Asus Vivobook)
+#==PANTALLA-Y-MONITOR==#
 profile {
-    output eDP-1 enable mode 1920x1080 position 0,490
-    output HDMI-A-1 enable mode 1920x1080 position 1920,0
+    output eDP-1 enable mode 1366x768 position 0,620
+    output HDMI-A-1 enable mode 1920x1080 position 1366,0
 }
-
-# Perfil 1: Solo el portátil (Dell Latitude)
-# profile {
-#     output eDP-1 enable mode 1366x768 position 0,0
-# }
-
-# Perfil 2: Portátil + Monitor Externo (Dell Latitude)
-# profile {
-#     output eDP-1 enable mode 1366x768 position 0,620
-#     output HDMI-A-1 enable mode 1920x1080 position 1366,0
-# }
