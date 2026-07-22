@@ -9,7 +9,7 @@ cp -r sway/ ~/.config
 cp -r waybar/ ~/.config
 
 #==CAMBIO-DE-PERMISOS-DE-EJECUCION==#
-sudo chmod +x ~/.config/rofi/script/power-profiles.sh
+sudo chmod +x ~/.config/rofi/script/power-profiles.nix
 
 #==COPIA-DE-LA-CONFIGURACION-DE-NIX==#
 sudo cp configuration.nix /etc/nixos/configuration.nix

@@ -22,7 +22,7 @@
 
 #==RED-E-INTERNET==#
   # Establece el Nombre del Host
-  networking.hostName = "NixOS-Vivobook-15";
+  networking.hostName = "NixOS-Latitude-7280";
 
   # Habilita la Red
   networking.networkmanager.enable = true;
@@ -87,8 +87,8 @@
   services.xserver.enable = true;
 
   # Habilita el Escritorio Plasma
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.desktopManager.xfce.enable = true;
 
 
 #==CONFIGURACION-DEL-USUARIO
@@ -146,12 +146,12 @@
     # Miscelaneos :
     ximimoments.katifetch git curl wget htop btop cava nyancat
     android-tools nicotine-plus podman distrobox virt-manager
-    pciutils
+    pciutils zip unzip xarchiver
 
     # Mis Programas :
     ungoogled-chromium kitty discord telegram-desktop obs-studio nocturne
     filezilla vlc kdePackages.kdenlive vscodium obsidian libresprite  
-    retroarch
+    retroarch 
   ];
 
   # Aqui van las Fuentes Tipograficas

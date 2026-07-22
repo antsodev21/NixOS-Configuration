@@ -165,7 +165,7 @@
   client.unfocused #1a1921 #1a1921 #7a778a #1a1921 #1a1921
 
   # Activa la Transparencia de las Ventanas
-  for_window [class=".*"] opacity 0.90
-  for_window [app_id=".*"] opacity 0.90
+  for_window [class=".*"] opacity 0.59
+  for_window [app_id=".*"] opacity 0.70
 
 include /etc/sway/config.d/*

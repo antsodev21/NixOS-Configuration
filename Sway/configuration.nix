@@ -187,7 +187,7 @@
     pciutils
 
     # Mis Programas :
-    ungoogled-chromium foot vesktop telegram-desktop obs-studio nocturne
+    ungoogled-chromium foot discord telegram-desktop obs-studio nocturne
     filezilla vlc kdePackages.kdenlive vscodium obsidian libresprite  
     retroarch 
   ];
