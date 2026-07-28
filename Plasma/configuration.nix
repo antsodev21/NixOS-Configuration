@@ -21,8 +21,11 @@
   services.logind.settings.Login.HandlePowerKey = "ignore";
 
 #==RED-E-INTERNET==#
-  # Establece el Nombre del Host
+  # Establece el Nombre del Host (Asus)
   networking.hostName = "NixOS-Vivobook-15";
+
+  # Establece el Nombre del Host (Dell)
+  # networking.hostName = "NixOS-Latitude-7280";
 
   # Habilita la Red
   networking.networkmanager.enable = true;
@@ -90,6 +93,10 @@
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
+  # Habilita el Escritorio Xfce
+  # services.xserver.displayManager.lightdm.enable = true;
+  # services.xserver.desktopManager.xfce.enable = true;
+
 
 #==CONFIGURACION-DEL-USUARIO
   # Define el Usuario
@@ -146,7 +153,7 @@
     # Miscelaneos :
     ximimoments.katifetch git curl wget htop btop cava nyancat
     android-tools nicotine-plus podman distrobox virt-manager
-    pciutils
+    pciutils zip unzip xarchiver
 
     # Mis Programas :
     ungoogled-chromium kitty discord telegram-desktop obs-studio nocturne
