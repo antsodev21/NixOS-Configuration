@@ -98,7 +98,7 @@
   # services.xserver.desktopManager.xfce.enable = true;
 
 
-#==CONFIGURACION-DEL-USUARIO
+#==CONFIGURACION-DEL-USUARIO==#
   # Define el Usuario
   users.users."antsoftware21" = {
     isNormalUser = true;
@@ -153,7 +153,7 @@
     # Miscelaneos :
     ximimoments.katifetch git curl wget htop btop cava nyancat
     android-tools nicotine-plus podman distrobox virt-manager
-    pciutils zip unzip xarchiver
+    pciutils zip unzip xarchiver xdg-user-dirs xdg-desktop-portal
 
     # Mis Programas :
     ungoogled-chromium kitty discord telegram-desktop obs-studio nocturne
