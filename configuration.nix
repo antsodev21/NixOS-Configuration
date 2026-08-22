@@ -156,7 +156,7 @@
     pciutils zip unzip xarchiver xdg-user-dirs xdg-desktop-portal
 
     # Mis Programas :
-    ungoogled-chromium kitty discord telegram-desktop obs-studio nocturne
+    ungoogled-chromium kitty discord telegram-desktop obs-studio strawberry
     filezilla vlc kdePackages.kdenlive vscodium obsidian libresprite  
     retroarch
   ];
