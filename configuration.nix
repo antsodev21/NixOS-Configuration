@@ -8,6 +8,8 @@
 
 #==CONFIGURACION-DE-GRUB-Y-SYSTEMD==#
   # Instala Grub
+
+  # Modo UEFI
   boot.loader = {
     grub = {
       enable = true;
@@ -16,6 +18,10 @@
     };
     efi.canTouchEfiVariables = true;
   };
+
+  # Modo BIOS
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda";
 
   # Hace que SystemD Ignore el Boton de Apagado
   services.logind.settings.Login.HandlePowerKey = "ignore";
@@ -86,6 +92,9 @@
   console.keyMap = "es";
 
 #==CONFIGURACION-DEL-ENTORNO==#
+  # Activa fish
+  programs.fish.enable = true;
+
   # Habilita X11
   services.xserver.enable = true;
 
@@ -97,13 +106,13 @@
   # services.xserver.displayManager.lightdm.enable = true;
   # services.xserver.desktopManager.xfce.enable = true;
 
-
 #==CONFIGURACION-DEL-USUARIO==#
   # Define el Usuario
   users.users."antsoftware21" = {
     isNormalUser = true;
     description = "Antsoftware21";
     extraGroups = [ "networkmanager" "wheel" "libvirtd" "kvm" "podman" "adbusers" ];
+    shell = pkgs.fish;
 
   # Rangos de subUID y subGID para contenedores rootless
   subUidRanges = [ { count = 65536; startUid = 100000; } ];
@@ -148,7 +157,7 @@
   # Lista de Paquetes
   environment.systemPackages = with pkgs; [
     # Temas :  
-    papirus-icon-theme graphite-cursors    
+    papirus-icon-theme   
 
     # Miscelaneos :
     ximimoments.katifetch git curl wget htop btop cava nyancat
@@ -156,9 +165,9 @@
     pciutils zip unzip xarchiver xdg-user-dirs xdg-desktop-portal
 
     # Mis Programas :
-    ungoogled-chromium kitty discord telegram-desktop obs-studio strawberry
-    filezilla vlc kdePackages.kdenlive vscodium obsidian libresprite  
-    retroarch
+    librewolf kitty discord telegram-desktop strawberry obs-studio
+    vscodium obsidian libresprite krita kdePackages.kdenlive filezilla
+    gimp nicotine-plus transmission_4 retroarch
   ];
 
   # Aqui van las Fuentes Tipograficas
