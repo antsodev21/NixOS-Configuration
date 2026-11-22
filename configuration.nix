@@ -7,21 +7,21 @@
     ];
 
 #==CONFIGURACION-DE-GRUB-Y-SYSTEMD==#
-  # Instala Grub
+  # Instala GRUB
 
-  # Modo UEFI
-  boot.loader = {
-    grub = {
-      enable = true;
-      device = "nodev"; 
-      efiSupport = true;
+    # Modo UEFI
+    boot.loader = {
+      grub = {
+        enable = true;
+        device = "nodev"; 
+        efiSupport = true;
+      };
+      efi.canTouchEfiVariables = true;
     };
-    efi.canTouchEfiVariables = true;
-  };
 
-  # Modo BIOS
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
+    # Modo BIOS
+    # boot.loader.grub.enable = true;
+    # boot.loader.grub.device = "/dev/sda";
 
   # Hace que SystemD Ignore el Boton de Apagado
   services.logind.settings.Login.HandlePowerKey = "ignore";
@@ -98,13 +98,25 @@
   # Habilita X11
   services.xserver.enable = true;
 
+  # Habilita el Escritorio GNOME
+  # services.displayManager.gdm.enable = true;
+  # services.desktopManager.gnome.enable = true;
+
   # Habilita el Escritorio Plasma
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # services.displayManager.sddm.enable = true;
+  # services.desktopManager.plasma6.enable = true;
 
   # Habilita el Escritorio Xfce
   # services.xserver.displayManager.lightdm.enable = true;
   # services.xserver.desktopManager.xfce.enable = true;
+
+  # Habilita el Escritorio Budgie
+  # services.xserver.displayManager.lightdm.enable = true;
+  # services.desktopManager.budgie.enable = true;
+
+  # Habilita el Escritorio COSMIC
+  services.displayManager.cosmic-greeter.enable = true;
+  services.desktopManager.cosmic.enable = true;
 
 #==CONFIGURACION-DEL-USUARIO==#
   # Define el Usuario
@@ -157,7 +169,7 @@
   # Lista de Paquetes
   environment.systemPackages = with pkgs; [
     # Temas :  
-    papirus-icon-theme   
+    papirus-icon-theme
 
     # Miscelaneos :
     ximimoments.katifetch git curl wget htop btop cava nyancat
@@ -167,7 +179,7 @@
     # Mis Programas :
     librewolf kitty discord telegram-desktop strawberry obs-studio
     vscodium obsidian libresprite krita kdePackages.kdenlive filezilla
-    gimp nicotine-plus transmission_4 retroarch
+    vlc gimp nicotine-plus transmission_4 retroarch
   ];
 
   # Aqui van las Fuentes Tipograficas
